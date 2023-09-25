@@ -54,13 +54,11 @@ public class Bubble : MonoBehaviour
 
 
         GameManager.Instance.score++;
-        GameManager.Instance.bubbleCount--;
         Destroy(gameObject);
     }
 
     void OnBecameInvisible()
     {
-        GameManager.Instance.bubbleCount--;
         Destroy(gameObject);
     }
 

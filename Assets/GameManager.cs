@@ -8,10 +8,10 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public int combo = 1;
 
-    public float delay = 60;
+    public float delay = 3600;
     public float timer;
 
-    public int bubbleCount = 0;
+    public static float spawnFrequency = 120f;
 
     public GameObject bubblePrefab;
 
@@ -42,19 +42,14 @@ public class GameManager : MonoBehaviour
         if(timer < 1)
         {
             SpawnBubble();
-            delay = 60f / (score + combo);
+            delay = spawnFrequency / Mathf.Sqrt((score  / 8) + combo);
             timer = delay;
         }
     }
 
     void SpawnBubble()
     {
-        if(bubbleCount < 512)
-        {
-            Vector2 pos = Camera.main.ViewportToWorldPoint(new Vector2(Random.value, Random.value));
-            Instantiate(bubblePrefab, (Vector3)pos, Quaternion.identity);
-            bubbleCount++;
-        }
-        
+        Vector2 pos = Camera.main.ViewportToWorldPoint(new Vector2(Random.value, Random.value));
+        Instantiate(bubblePrefab, (Vector3)pos, Quaternion.identity); 
     }
 }
